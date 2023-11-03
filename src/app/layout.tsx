@@ -2,6 +2,9 @@ import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
+import Providers from "@/components/providers/providers";
+import Navbar from "@/components/navbar";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -20,7 +23,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>{children}</body>
+      <Providers>
+        <body className={`font-sans ${inter.variable}`}>
+          <Navbar/>
+          <div className="container max-w-7xl mx-auto h-full">
+            {children}
+          </div>
+        </body>
+      </Providers>
     </html>
   );
 }
