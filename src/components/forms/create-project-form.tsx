@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import type z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -20,12 +21,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { createProjectSchema } from '@/lib/validation/project';
 
 const CreateProjectForm = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const form = useForm<z.infer<typeof createProjectSchema>>({
     resolver: zodResolver(createProjectSchema),
     defaultValues: {
-      type: "mod"
+      type: "mod",
+      name: "",
     }
   });
 
@@ -42,14 +45,17 @@ const CreateProjectForm = () => {
       });
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const data = await response.json();
-
+      
       if (response.ok) {
+        // `/mod/${data.projectName}`
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        alert(`${data.message} created`);
+        router.push('/');
+      }
+      else {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+        setMessage(data.message);
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-      setMessage(data.message);
     }
     catch(error) {
       console.log(error);
@@ -108,7 +114,7 @@ const CreateProjectForm = () => {
           )}
         />
         <Button>{loading ? <Loader2 className='animate-spin' /> : "Create"}</Button>
-        {message && <span>{message}</span>}
+        {message && <div className='w-full flex justify-center items-center'><span className='text-red-600 font-bold'>{message}</span></div>}
       </form>
     </Form>
   );

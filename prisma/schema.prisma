@@ -68,7 +68,8 @@ model Project {
     draft         Boolean   @default(true)
     approved      Boolean   @default(false)
     createdAt     DateTime  @default(now())
-    updatedAt     DateTime
+    updatedAt     DateTime  @updatedAt
     authorId      String
+    downloads     Int
     author        User      @relation(fields: [authorId], references: [id])
 }

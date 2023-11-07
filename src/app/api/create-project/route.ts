@@ -33,11 +33,12 @@ export async function POST(request: Request) {
           connect: { id: session.user.id }
         },
         type,
-        description
+        description,
+        downloads: 0
       }
     });
   
-    return NextResponse.json({ message: newProject.name }, { status: 200 });
+    return NextResponse.json({ projectName: newProject.name }, { status: 200 });
   }
   catch(error) {
     console.log("[ERROR][CREATE_PROJECT_POST]: ", error);

@@ -10,12 +10,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
-import CreateProjectForm from '../forms/create-project-form';
+import CreateProjectForm from '@/components/forms/create-project-form';
 
 const CreateProjectModal = () => {
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button>
           <div className='flex justify-center items-center gap-2'>
             <PlusCircleIcon />
