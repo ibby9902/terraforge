@@ -67,6 +67,8 @@ model Project {
     description   String?
     draft         Boolean   @default(true)
     approved      Boolean   @default(false)
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime
     authorId      String
     author        User      @relation(fields: [authorId], references: [id])
 }
