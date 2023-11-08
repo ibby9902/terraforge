@@ -20,7 +20,11 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Textarea } from "@/components/ui/textarea";
 import { createProjectSchema } from '@/lib/validation/project';
 
-const CreateProjectForm = () => {
+interface Props {
+  setOpen: (val: boolean) => void;
+}
+
+const CreateProjectForm = ({ setOpen } : Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -47,6 +51,7 @@ const CreateProjectForm = () => {
       const data = await response.json();
       
       if (response.ok) {
+        setOpen(false);
         // `/mod/${data.projectName}`
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
         router.push('/');

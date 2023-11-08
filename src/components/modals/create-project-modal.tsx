@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import { PlusCircleIcon } from 'lucide-react';
 
 import {
@@ -13,8 +14,9 @@ import { Button } from '@/components/ui/button';
 import CreateProjectForm from '@/components/forms/create-project-form';
 
 const CreateProjectModal = () => {
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>
           <div className='flex justify-center items-center gap-2'>
@@ -30,7 +32,7 @@ const CreateProjectModal = () => {
             New projects are created as drafts and can be found under your profile page.
           </DialogDescription>
         </DialogHeader>
-        <CreateProjectForm />
+        <CreateProjectForm setOpen={setOpen}/>
       </DialogContent>
     </Dialog>
   );
