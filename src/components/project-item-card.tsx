@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { RefreshCcw, Download } from 'lucide-react';
 
 interface Props {
+  id: string;
   name: string;
   authorName: string;
   icon?: string;
@@ -10,14 +11,14 @@ interface Props {
   numDownloads: number;
 } 
 
-const ProjectItemCard = ({ name, authorName, icon, description, numDownloads } : Props) => {
+const ProjectItemCard = ({ id, name, authorName, icon, description, numDownloads } : Props) => {
   return (
     <div className='bg-accent rounded-xl grid grid-cols-2 sm:grid-cols-3 p-6 grid-rows-4 sm:grid-rows-3 gap-4'>
       <div className='bg-black aspect-square w-full rounded-2xl row-span-2 sm:row-span-3 col-end-1'>
         {/* TODO: add "icon" */}
       </div>
       <div className='flex items-end gap-2 col-span-2 flex-wrap'>
-        <Link href={`/mod/${name}`} className='font-bold text-2xl'>{name}</Link>
+        <Link href={`/mod/${id}`} className='font-bold text-2xl'>{name}</Link>
         <span>by</span>
         <Link href={`/user/${authorName}`} className='underline hover:text-gray-500'>{authorName}</Link>
       </div>

@@ -1,14 +1,11 @@
 import React from 'react';
-import { RefreshCcw, Download, CalendarDays, Flag, Heart } from 'lucide-react';
 
-import { db } from '@/server/db';
-import { Separator } from '@/components/ui/separator';
-import { Button } from '@/components/ui/button';
 import ModInfoCard from '@/components/mod/mod-info-card';
+import { db } from '@/server/db';  
 
 interface Props {
   params: {
-    name: string
+    id: string
   }
 }
 
@@ -17,7 +14,7 @@ const ModPage = async ({ params } : Props) => {
   const mod = await db.project.findUnique({
     where: {
       type: "mod",
-      name: params.name
+      id: params.id
     }
   });
 

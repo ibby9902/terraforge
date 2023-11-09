@@ -54,7 +54,7 @@ const CreateProjectForm = ({ setOpen } : Props) => {
         setOpen(false);
         // `/mod/${data.projectName}`
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        router.push('/');
+        router.push(`/mod/${data.projectId}`);
       }
       else {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
