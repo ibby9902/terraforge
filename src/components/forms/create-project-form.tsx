@@ -54,7 +54,7 @@ const CreateProjectForm = ({ setOpen } : Props) => {
         setOpen(false);
         // `/mod/${data.projectName}`
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        router.push(`/mod/${data.projectId}`);
+        router.push(`/${form.watch("type")}/${data.slug}`);
       }
       else {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
@@ -99,7 +99,7 @@ const CreateProjectForm = ({ setOpen } : Props) => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} autoComplete='off'/>
               </FormControl>
               <FormMessage />
             </FormItem>
