@@ -61,7 +61,8 @@ model User {
 }
 
 model Project {
-    id            String    @id 
+    id            String    @id @default(uuid())
+    slug          String    @unique
     type          String
     name          String
     description   String?

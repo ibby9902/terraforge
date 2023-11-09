@@ -5,7 +5,7 @@ import { db } from '@/server/db';
 
 interface Props {
   params: {
-    id: string
+    slug: string
   }
 }
 
@@ -14,7 +14,7 @@ const ModPage = async ({ params } : Props) => {
   const mod = await db.project.findUnique({
     where: {
       type: "mod",
-      id: params.id
+      slug: params.slug
     }
   });
 
