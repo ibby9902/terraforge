@@ -26,7 +26,7 @@ export default function RootLayout({
       <Providers>
         <body className={`font-sans ${inter.variable}`}>
           <Navbar/>
-          <div className="container max-w-7xl mx-auto h-full">
+          <div className="container max-w-7xl mx-auto">
             {children}
           </div>
         </body>
