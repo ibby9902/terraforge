@@ -16,9 +16,12 @@ export async function POST(request: Request) {
     const json = await request.json();
     const { type, name, description } = createProjectSchema.parse(json);
 
+    const modId = name.replace(/\s+/g, '-').toLowerCase(); // TODO: move to util function
+
     const project = await db.project.findUnique({
       where: {
-        name
+        name,
+        id: modId
       }
     });
   
@@ -29,6 +32,7 @@ export async function POST(request: Request) {
     const newProject = await db.project.create({
       data: {
         name,
+        id: modId,
         author: {
           connect: { id: session.user.id }
         },
@@ -38,7 +42,7 @@ export async function POST(request: Request) {
       }
     });
   
-    return NextResponse.json({ projectName: newProject.name }, { status: 200 });
+    return NextResponse.json({ projectId: newProject.id }, { status: 200 });
   }
   catch(error) {
     console.log("[ERROR][CREATE_PROJECT_POST]: ", error);
