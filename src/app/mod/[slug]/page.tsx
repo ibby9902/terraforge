@@ -10,6 +10,18 @@ interface Props {
   }
 }
 
+export async function generateMetadata({ params } : Props) {
+  const mod = await db.project.findUnique({
+    where: {
+      type: "mod",
+      slug: params.slug
+    }
+  });
+  return {
+    title: `${mod?.name} - Terraforge`
+  };
+}
+
 const ModPage = async ({ params } : Props) => {
 
   const mod = await db.project.findUnique({

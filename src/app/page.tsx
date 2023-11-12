@@ -2,6 +2,12 @@ import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 
+export function generateMetadata() {
+  return {
+    title: "Terraforge"
+  };
+}
+
 export default function HomePage() {
   return (
     <main className="w-full h-full">
