@@ -3,6 +3,12 @@ import React from 'react';
 import { db } from '@/server/db';
 import ProjectItemCard from '@/components/project-item-card';
 
+export function generateMetadata() {
+  return {
+    title: "Search mods - Terraforge"
+  };
+}
+
 const ModsPage = async () => {
   const mods = await db.project.findMany({
     take: 5,
