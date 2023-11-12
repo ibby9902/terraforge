@@ -2,6 +2,7 @@ import React from 'react';
 
 import ModInfoCard from '@/components/mod/mod-info-card';
 import { db } from '@/server/db';  
+import ModAuthorCard from '@/components/mod/mod-author-card';
 
 interface Props {
   params: {
@@ -15,6 +16,9 @@ const ModPage = async ({ params } : Props) => {
     where: {
       type: "mod",
       slug: params.slug
+    },
+    include: {
+      author: true
     }
   });
 
@@ -38,6 +42,8 @@ const ModPage = async ({ params } : Props) => {
       <div className='w-full lg:col-span-6 flex flex-col gap-4'>
         <div className='bg-accent p-2 rounded-xl'>test</div>
       </div>
+
+      <ModAuthorCard name={mod.author.name} avatar={mod.author.image}/>
     </div>
   );
 };
