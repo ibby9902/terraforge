@@ -40,6 +40,9 @@ const ModPage = async ({ params } : Props) => {
 
   return (
     <div className='flex flex-col lg:grid lg:grid-cols-8 gap-6 pt-16'>
+      <div className='w-full lg:col-span-6 flex flex-col gap-4'>
+        <div className='bg-accent p-2 rounded-xl'>test</div>
+      </div>
       <ModInfoCard 
         icon={null} 
         name={mod.name}
@@ -50,12 +53,7 @@ const ModPage = async ({ params } : Props) => {
         approved={mod.approved}
         draft={mod.draft}
       />
-      
-      <div className='w-full lg:col-span-6 flex flex-col gap-4'>
-        <div className='bg-accent p-2 rounded-xl'>test</div>
-      </div>
-
-      <ModAuthorCard name={mod.author.name} avatar={mod.author.image}/>
+      <ModAuthorCard className="lg:col-start-7" name={mod.author.name} avatar={mod.author.image} />
     </div>
   );
 };

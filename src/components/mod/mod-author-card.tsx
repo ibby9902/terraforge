@@ -1,15 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 interface Props {
-  avatar: string | null;
+  className?: string;
   name: string | null;
+  avatar: string | null;
 }
 
-const ModAuthorCard = ({ avatar, name } : Props) => {
+const ModAuthorCard = ({ className, avatar, name } : Props) => {
   return (
-    <div className='md:flex flex-col bg-accent rounded-2xl md:col-span-2 p-4 gap-2'>
+    <div className={cn(className, "md:flex flex-col bg-accent rounded-2xl md:col-span-2 p-4 gap-2")}>
       <h1 className='text-2xl font-bold'>Created by</h1>
       <Link href={`/user/${name}`} className='flex items-center gap-4 hover:bg-muted-foreground ease-in-out duration-100 rounded-xl p-2'>
         <div className='relative aspect-square w-12 h-12'>
