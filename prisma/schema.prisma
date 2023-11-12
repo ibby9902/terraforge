@@ -66,6 +66,7 @@ model Project {
     type          String
     name          String
     description   String?
+    summary       String?
     draft         Boolean   @default(true)
     approved      Boolean   @default(false)
     createdAt     DateTime  @default(now())

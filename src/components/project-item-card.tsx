@@ -8,11 +8,11 @@ interface Props {
   name: string;
   authorName: string;
   icon?: string;
-  description: string | null;
+  summary: string | null;
   numDownloads: number;
 } 
 
-const ProjectItemCard = ({ id, slug, name, authorName, icon, description, numDownloads } : Props) => {
+const ProjectItemCard = ({ id, slug, name, authorName, icon, summary, numDownloads } : Props) => {
   return (
     <div className='bg-accent rounded-xl grid grid-cols-2 sm:grid-cols-3 p-6 grid-rows-4 sm:grid-rows-3 gap-4'>
       <div className='bg-black aspect-square w-full rounded-2xl row-span-2 sm:row-span-3 col-end-1'>
@@ -24,7 +24,7 @@ const ProjectItemCard = ({ id, slug, name, authorName, icon, description, numDow
         <Link href={`/user/${authorName}`} className='underline hover:text-gray-500'>{authorName}</Link>
       </div>
       <div></div>
-      <div className='col-span-2'><p className=''>{description ?? <span className='italic'>No description</span>}</p></div>
+      <div className='col-span-2'><p className=''>{summary ?? <span className='italic'>No summary</span>}</p></div>
       <div></div>
       <div className='flex items-center gap-2'><Download size={16}/><span className='font-bold'>{numDownloads}</span> downloads</div>
       <div></div>

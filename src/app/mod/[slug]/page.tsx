@@ -46,7 +46,7 @@ const ModPage = async ({ params } : Props) => {
       <ModInfoCard 
         icon={null} 
         name={mod.name}
-        description={mod.description}
+        summary={mod.summary}
         downloads={mod.downloads}
         createdAtTimeStamp={mod.createdAt.toLocaleDateString()}
         updatedAtTimeStamp={mod.updatedAt.toLocaleDateString()}

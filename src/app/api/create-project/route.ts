@@ -14,7 +14,7 @@ export async function POST(request: Request) {
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const json = await request.json();
-    const { type, name, description } = createProjectSchema.parse(json);
+    const { type, name, summary } = createProjectSchema.parse(json);
 
     const slug = name.replace(/\s+/g, '-').toLowerCase(); // TODO: move to util function
 
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
           connect: { id: session.user.id }
         },
         type,
-        description,
+        summary,
         downloads: 0
       }
     });

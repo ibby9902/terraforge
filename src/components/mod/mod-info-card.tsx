@@ -1,5 +1,5 @@
 import React from 'react';
-import { RefreshCcw, Download, CalendarDays, Flag, Heart } from 'lucide-react';
+import { RefreshCcw, CalendarDays, Flag, Heart } from 'lucide-react';
 
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 interface Props {
   icon: string | null;
   name: string;
-  description: string | null;
+  summary: string | null;
   downloads: number;
   createdAtTimeStamp: string;
   updatedAtTimeStamp: string;
@@ -15,7 +15,7 @@ interface Props {
   draft: boolean;
 }
 
-const ModInfoCard = ({ icon, name, description, downloads, createdAtTimeStamp, updatedAtTimeStamp, approved, draft } : Props) => {
+const ModInfoCard = ({ icon, name, summary, downloads, createdAtTimeStamp, updatedAtTimeStamp, approved, draft } : Props) => {
   return (
     <div className='md:flex flex-col bg-accent rounded-2xl md:col-span-2 p-4 gap-2'>
         <div className='flex flex-col gap-2'>
@@ -26,14 +26,14 @@ const ModInfoCard = ({ icon, name, description, downloads, createdAtTimeStamp, u
             <h1 className='font-bold text-3xl'>{name}</h1>
           </div>
           <div className='w-full'>
-            <p className=''>{description ?? <span className='italic'>No description</span>}</p>
+            <p className=''>{summary ?? <span className='italic'>No summary</span>}</p>
           </div>
         </div>
         <Separator />
         <div className='flex flex-col gap-2'>
-          <div className='w-full flex items-center gap-2'>
-            <Download size={24}/>
-            <div className=''><span className='font-bold text-2xl'>{downloads}</span>{" downloads"}</div>
+          <div className='w-full flex items-center justify-between'>
+            <p>Downloads:</p>
+            <p>{downloads}</p>
           </div>
 
           <div className='w-full flex items-center gap-2'>

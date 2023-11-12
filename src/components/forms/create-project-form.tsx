@@ -107,10 +107,10 @@ const CreateProjectForm = ({ setOpen } : Props) => {
         />
         <FormField
           control={form.control}
-          name="description"
+          name="summary"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Summary</FormLabel>
               <FormControl>
                 <Textarea {...field} />
               </FormControl>
