@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 
 import Providers from "@/components/providers/providers";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "@/components/navbar";
 
 const inter = Inter({
@@ -22,13 +23,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <Providers>
         <body className={`font-sans ${inter.variable}`}>
-          <Navbar/>
-          <div className="container max-w-7xl mx-auto">
-            {children}
-          </div>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Navbar/>
+            <div className="container max-w-7xl mx-auto">
+              {children}
+            </div>
+          </ThemeProvider>
         </body>
       </Providers>
     </html>
