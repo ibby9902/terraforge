@@ -6,12 +6,13 @@ import { useSession } from 'next-auth/react';
 import NavAvatar from '@/components/nav-avatar';
 import { buttonVariants } from '@/components/ui/button';
 import CreateProjectModal from '@/components/modals/create-project-modal';
+import ThemeToggleButton from '@/components/theme-toggle-button';
 
 const Navbar = () => {
   const { data: session, status } = useSession();
 
   return (
-    <header className="sticky top-0 inset-x-0 bg-gray-100/60 backdrop-blur-md shadow-md z-10 py-4">
+    <header className="sticky top-0 inset-x-0 light:bg-gray-100/60 backdrop-blur-md shadow-md z-10 py-4">
       <div className='container max-w-7xl h-full mx-auto flex items-center justify-between gap-2'>
         <div className='flex items-center text-xl gap-8'>
           <Link href="/">
@@ -26,6 +27,7 @@ const Navbar = () => {
             <div className='flex gap-10'>
               <CreateProjectModal />
               <NavAvatar avatar={session.user?.image} />
+              <ThemeToggleButton />
             </div> : 
             <div className='flex gap-4'>
               <Link href="/sign-in" className={buttonVariants({ variant: "default" })}>Sign in</Link>
