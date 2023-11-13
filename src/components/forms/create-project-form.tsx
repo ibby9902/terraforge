@@ -80,7 +80,7 @@ const CreateProjectForm = ({ setOpen } : Props) => {
             <FormItem>
               <FormLabel>Project type</FormLabel>
               <FormControl>
-                <div>
+                <div className='flex justify-start'>
                   <ToggleGroup type="single" defaultValue={field.value} {...field} onValueChange={(value) => {
                     if (value) field.onChange(value);
                   }}>
