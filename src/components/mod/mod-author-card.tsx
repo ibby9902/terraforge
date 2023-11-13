@@ -11,9 +11,9 @@ interface Props {
 
 const ModAuthorCard = ({ className, avatar, name } : Props) => {
   return (
-    <div className={cn(className, "md:flex flex-col bg-accent rounded-2xl md:col-span-2 p-4 gap-2")}>
+    <div className={cn(className, "md:flex flex-col border-accent border rounded-2xl md:col-span-2 p-4 gap-2")}>
       <h1 className='text-2xl font-bold'>Created by</h1>
-      <Link href={`/user/${name}`} className='flex items-center gap-4 hover:bg-muted-foreground ease-in-out duration-100 rounded-xl p-2'>
+      <Link href={`/user/${name}`} className='flex items-center gap-4 hover:bg-accent ease-in-out duration-100 rounded-xl p-2'>
         <div className='relative aspect-square'>
           <Image
             src={avatar ?? "https://github.com/ibby9902"}
