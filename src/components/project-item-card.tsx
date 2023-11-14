@@ -24,8 +24,11 @@ const ProjectItemCard = ({ id, slug, name, authorName, icon, summary, numDownloa
         <Link href={`/user/${authorName}`} className='underline hover:text-gray-500'>{authorName}</Link>
       </div>
       <div></div>
-      <div className='col-span-2'><p className=''>{summary ?? <span className='italic'>No summary</span>}</p></div>
+      <div className='col-span-3'><p className=''>{summary ?? <span className='italic'>No summary</span>}</p></div>
       <div></div>
+      <div></div>
+      <div></div>
+      <div className='hidden md:block'></div>
       <div className='flex items-center gap-2'><Download size={16}/><span className='font-bold'>{numDownloads}</span> downloads</div>
       <div></div>
       <div className='flex justify-end items-center gap-2'><RefreshCcw size={16}/>Updated 10 years ago</div>

@@ -3,6 +3,8 @@ import React from 'react';
 import ModInfoCard from '@/components/mod/mod-info-card';
 import { db } from '@/server/db';  
 import ModAuthorCard from '@/components/mod/mod-author-card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import ExternalResourcesCard from '@/components/mod/external-resources-card';
 
 interface Props {
   params: {
@@ -41,7 +43,16 @@ const ModPage = async ({ params } : Props) => {
   return (
     <div className='flex flex-col lg:grid lg:grid-cols-8 gap-6 pt-16'>
       <div className='w-full lg:col-span-6 flex flex-col gap-4'>
-        <div className='bg-accent p-2 rounded-xl'>test</div>
+        <Tabs defaultValue="description">
+          <TabsList className='w-full flex justify-evenly'>
+            <TabsTrigger value="description" className='w-full'>Description</TabsTrigger>
+            <TabsTrigger value="gallery" className='w-full'>Gallery</TabsTrigger>
+            <TabsTrigger value="releases" className='w-full'>Releases</TabsTrigger>
+          </TabsList>
+          <TabsContent value="description" className='bg-accent rounded-xl p-4'>Mod description here</TabsContent>
+          <TabsContent value="gallery" className='bg-accent rounded-xl p-4'>Mod gallery here</TabsContent>
+          <TabsContent value="releases" className='bg-accent rounded-xl p-4'>Mod releases here</TabsContent>
+        </Tabs>
       </div>
       <ModInfoCard 
         icon={null} 
@@ -53,6 +64,7 @@ const ModPage = async ({ params } : Props) => {
         approved={mod.approved}
         draft={mod.draft}
       />
+      <ExternalResourcesCard className="lg:col-start-7" issueLink="https://www.google.com" sourceLink="https://www.google.com" wikiLink="https://www.google.com" discordLink="https://www.google.com" />
       <ModAuthorCard className="lg:col-start-7" name={mod.author.name} avatar={mod.author.image} />
     </div>
   );

@@ -25,24 +25,28 @@ const ModInfoCard = ({ icon, name, summary, downloads, createdAtTimeStamp, updat
           <div className='w-full'>
             <h1 className='font-bold text-3xl'>{name}</h1>
           </div>
-          <div className='w-full'>
+          <div className='w-full text-sm'>
             <p className='text-muted-foreground'>{summary ?? <span className='italic'>No summary</span>}</p>
           </div>
         </div>
         <Separator />
         <div className='flex flex-col gap-2'>
           <div className='w-full flex items-center justify-between'>
-            <p>Downloads:</p>
+            <p>Downloads</p>
             <p>{downloads}</p>
           </div>
 
-          <div className='w-full flex items-center gap-2'>
-            <CalendarDays size={16}/>
-            <div className='text-sm'><span className=''>{"Created: "}{createdAtTimeStamp}</span></div>
+          <div className='w-full flex items-center text-sm text-muted-foreground'>
+            <div className='w-full flex items-center justify-between'>
+              <p>Created</p>
+              <p>{createdAtTimeStamp}</p>
+            </div>
           </div>
-          <div className='w-full flex items-center gap-2'>
-            <RefreshCcw size={16}/>
-            <div className='text-sm'><span className=''>{"Updated: "}{updatedAtTimeStamp}</span></div>
+          <div className='w-full flex items-center text-sm text-muted-foreground'>
+            <div className='w-full flex items-center justify-between'>
+              <p>Updated</p>
+              <p>{updatedAtTimeStamp}</p>
+            </div>
           </div>
         </div>
         <Separator/>

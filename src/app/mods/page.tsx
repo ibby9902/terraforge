@@ -21,9 +21,9 @@ const ModsPage = async () => {
   });
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-8 gap-6 pt-16'>
-      {/* Options container */}
-      <div className='hidden md:flex flex-col bg-accent rounded-2xl h-full md:col-span-2'>
+    <div className='grid grid-cols-1 md:grid-cols-8 gap-6 pt-16 h-full'>
+      {/* Filter container */}
+      <div className='hidden md:flex flex-col bg-accent rounded-2xl md:col-span-2 p-4 h-96'>
         test
       </div>
       
