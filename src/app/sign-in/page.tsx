@@ -6,12 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-export function generateMetadata() {
-  return {
-    title: "Sign in - Terraforge"
-  };
-}
-
 const SignInPage = () => {
   return (
     <main className='w-full h-full flex justify-center items-center pt-20'>
