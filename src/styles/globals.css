@@ -80,3 +80,15 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  h1 {
+    @apply text-[24px]
+  }
+  h2 {
+    @apply text-[22px]
+  }
+  h3 {
+    @apply text-[20px]
+  }
+}

@@ -6,6 +6,7 @@ import ModAuthorCard from '@/components/mod/mod-author-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ExternalResourcesCard from '@/components/mod/external-resources-card';
 import ModDescriptionForm from '@/components/forms/mod-description-form';
+import { getServerAuthSession } from '@/server/auth';
 
 interface Props {
   params: {
@@ -26,7 +27,7 @@ export async function generateMetadata({ params } : Props) {
 }
 
 const ModPage = async ({ params } : Props) => {
-
+  const session = await getServerAuthSession();
   const mod = await db.project.findUnique({
     where: {
       type: "mod",
@@ -41,6 +42,8 @@ const ModPage = async ({ params } : Props) => {
     return <div className='w-full flex h-full justify-center items-center'>Mod not found</div>;
   }
 
+  const disableEditor = session?.user?.id === mod.author.id ? true : false;
+
   return (
     <div className='flex gap-6 pt-16 h-full'>
       <div className='w-full lg:col-span-6 flex flex-col gap-4'>
@@ -51,7 +54,7 @@ const ModPage = async ({ params } : Props) => {
             <TabsTrigger value="releases" className='w-full'>Releases</TabsTrigger>
           </TabsList>
           <TabsContent value="description" className='bg-accent rounded-xl p-4'>
-            <ModDescriptionForm/>
+            <ModDescriptionForm disabled={disableEditor}/>
           </TabsContent>
           <TabsContent value="gallery" className='bg-accent rounded-xl p-4'>Mod gallery here</TabsContent>
           <TabsContent value="releases" className='bg-accent rounded-xl p-4'>Mod releases here</TabsContent>
