@@ -4,26 +4,47 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Heading from '@tiptap/extension-heading';
 import TextAlign from '@tiptap/extension-text-align';
-import Toolbar from './toolbar';
+import ListItem from '@tiptap/extension-list-item';
+import TextStyle from '@tiptap/extension-text-style';
+import Document from '@tiptap/extension-document';
+import Text from '@tiptap/extension-text';
+import Dropcursor from '@tiptap/extension-dropcursor';
+import Image from '@tiptap/extension-image';
+import Paragraph from '@tiptap/extension-paragraph';
+import Typography from '@tiptap/extension-typography';
+import Link from "@tiptap/extension-link";
+import Toolbar from '@/components/toolbar';
+import BulletList from '@tiptap/extension-bullet-list'
+import OrderedList from '@tiptap/extension-ordered-list'
+import Blockquote from '@tiptap/extension-blockquote';
 
 interface Props {
   description: string;
   onChange: (richText: string) => void;
+  disabled: boolean;
 }
 
-const TipTap = ({ description, onChange } : Props) => {
+const TipTap = ({ description, onChange, disabled } : Props) => {
   const editor = useEditor({
+    editable: disabled,
     extensions: [
       StarterKit.configure({}),
-      Heading.configure({
-        HTMLAttributes: {
-          class: "text-xl font-bold",
-          levels: [1]
-        }
-      }),
+      Heading.configure({}),
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
+      Document,
+      Paragraph,
+      Text,
+      Image,
+      Dropcursor,
+      Typography,
+      Link,
+      Blockquote,
+      Paragraph,
+      BulletList,
+      OrderedList,
+      ListItem,
     ],
     content: description,
     editorProps: {
@@ -34,7 +55,6 @@ const TipTap = ({ description, onChange } : Props) => {
     onUpdate({ editor }) {
       const json = JSON.stringify(editor.getJSON());
       onChange(json);
-      console.log(json);
     }
   });
 

@@ -27,12 +27,12 @@ const Navbar = () => {
             <div className='flex gap-10'>
               <CreateProjectModal />
               <NavAvatar avatar={session.user?.image} />
-              <ThemeToggleButton />
             </div> : 
             <div className='flex gap-4'>
               <Link href="/sign-in" className={buttonVariants({ variant: "default" })}>Sign in</Link>
               <Link href="/sign-up" className={buttonVariants({ variant: "outline" })}>Sign up</Link>
             </div>}
+            <ThemeToggleButton />
         </div>
       </div>
     </header>

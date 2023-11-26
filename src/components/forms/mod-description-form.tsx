@@ -19,34 +19,42 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { descriptionSchema } from '@/lib/validation/project';
 import TipTap from '@/components/tip-tap';
 
-const ModDescriptionForm = () => {
+interface Props {
+  disabled: boolean;
+}
+
+const ModDescriptionForm = ({ disabled } : Props) => {
   const form = useForm<z.infer<typeof descriptionSchema>>({
     resolver: zodResolver(descriptionSchema),
     mode: "onChange",
     defaultValues: {
       description: ""
-    }
+    },
+    disabled
   });
 
   const onSubmit = (values: z.infer<typeof descriptionSchema>) => {
-    console.log(values);
+    alert(values.description)
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-4'>
       <FormField
           control={form.control}
           name="description"
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <TipTap description={field.name} onChange={field.onChange}/>
+                <TipTap description={field.value} onChange={field.onChange} disabled/>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+        <div className='w-full flex justify-end'>
+          <Button>Save</Button>
+        </div>
       </form>
     </Form>
   );
