@@ -21,12 +21,12 @@ import Blockquote from '@tiptap/extension-blockquote';
 interface Props {
   description: string;
   onChange: (richText: string) => void;
-  disabled: boolean;
+  enableEditor: boolean;
 }
 
-const TipTap = ({ description, onChange, disabled } : Props) => {
+const TipTap = ({ description, onChange, enableEditor } : Props) => {
   const editor = useEditor({
-    editable: disabled,
+    editable: enableEditor,
     extensions: [
       StarterKit.configure({}),
       Heading.configure({}),
@@ -49,7 +49,7 @@ const TipTap = ({ description, onChange, disabled } : Props) => {
     content: description,
     editorProps: {
       attributes: {
-        class: "h-96 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        class: "rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
       }
     },
     onUpdate({ editor }) {
@@ -57,10 +57,10 @@ const TipTap = ({ description, onChange, disabled } : Props) => {
       onChange(json);
     }
   });
-
+  
   return (
     <div className='flex flex-col justify-stretch min-h-[250px] gap-4'>
-      <Toolbar editor={editor}/>
+      {enableEditor && <Toolbar editor={editor}/>}
       <EditorContent editor={editor} />
     </div>
   );

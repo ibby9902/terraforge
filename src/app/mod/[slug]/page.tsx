@@ -42,7 +42,7 @@ const ModPage = async ({ params } : Props) => {
     return <div className='w-full flex h-full justify-center items-center'>Mod not found</div>;
   }
 
-  const disableEditor = session?.user?.id === mod.author.id ? true : false;
+  const enableEditor = session?.user?.id === mod.author.id ? true : false;
 
   return (
     <div className='flex gap-6 pt-16 h-full'>
@@ -54,7 +54,7 @@ const ModPage = async ({ params } : Props) => {
             <TabsTrigger value="releases" className='w-full'>Releases</TabsTrigger>
           </TabsList>
           <TabsContent value="description" className='bg-accent rounded-xl p-4'>
-            <ModDescriptionForm disabled={disableEditor}/>
+            <ModDescriptionForm enabled={enableEditor}/>
           </TabsContent>
           <TabsContent value="gallery" className='bg-accent rounded-xl p-4'>Mod gallery here</TabsContent>
           <TabsContent value="releases" className='bg-accent rounded-xl p-4'>Mod releases here</TabsContent>

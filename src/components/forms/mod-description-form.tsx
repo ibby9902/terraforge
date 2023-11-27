@@ -20,17 +20,17 @@ import { descriptionSchema } from '@/lib/validation/project';
 import TipTap from '@/components/tip-tap';
 
 interface Props {
-  disabled: boolean;
+  enabled: boolean;
 }
 
-const ModDescriptionForm = ({ disabled } : Props) => {
+const ModDescriptionForm = ({ enabled } : Props) => {
   const form = useForm<z.infer<typeof descriptionSchema>>({
     resolver: zodResolver(descriptionSchema),
     mode: "onChange",
     defaultValues: {
       description: ""
     },
-    disabled
+    disabled: !enabled
   });
 
   const onSubmit = (values: z.infer<typeof descriptionSchema>) => {
@@ -46,7 +46,7 @@ const ModDescriptionForm = ({ disabled } : Props) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <TipTap description={field.value} onChange={field.onChange} disabled/>
+                <TipTap description={field.value} onChange={field.onChange} enableEditor={enabled}/>
               </FormControl>
               <FormMessage />
             </FormItem>

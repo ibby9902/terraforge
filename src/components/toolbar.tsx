@@ -63,7 +63,7 @@ const Toolbar = ({ editor } : Props) => {
       <Toggle size="sm" pressed={editor.isActive({ textAlign: 'right' })} onPressedChange={() => editor.chain().focus().setTextAlign('right').run()}>
         <AlignRightIcon className='h-4 w-4'/>
       </Toggle>
-      <Button className={buttonVariants({variant: "secondary", size: "sm"})} onClick={() => alert("Open modal")}>
+      <Button type='button' className={buttonVariants({variant: "secondary", size: "sm"})} onClick={() => alert("Open modal")}>
         <ImagePlusIcon className='h-4 w-4'/>
       </Button>
     </div>
