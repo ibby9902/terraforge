@@ -69,7 +69,7 @@ const ModPage = async ({ params }: Props) => {
             <TabsTrigger value="gallery" className='w-full'>Gallery</TabsTrigger>
             <TabsTrigger value="releases" className='w-full'>Releases</TabsTrigger>
           </TabsList>
-          <TabsContent value="description" className='bg-accent rounded-md p-4'>
+          <TabsContent value="description">
             <ModDescriptionForm enabled={enableEditor} description={mod.description} modId={mod.id}/>
           </TabsContent>
           <TabsContent value="gallery" className='bg-accent rounded-xl p-4'>Mod gallery here</TabsContent>
