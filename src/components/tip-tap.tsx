@@ -19,7 +19,7 @@ import OrderedList from '@tiptap/extension-ordered-list'
 import Blockquote from '@tiptap/extension-blockquote';
 
 interface Props {
-  description: string;
+  description: any;
   onChange: (richText: string) => void;
   enableEditor: boolean;
 }
@@ -46,15 +46,14 @@ const TipTap = ({ description, onChange, enableEditor } : Props) => {
       OrderedList,
       ListItem,
     ],
-    content: description,
+    content: JSON.parse(description),
     editorProps: {
       attributes: {
         class: "rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
       }
     },
     onUpdate({ editor }) {
-      const json = JSON.stringify(editor.getJSON());
-      onChange(json);
+      onChange(JSON.stringify(editor.getJSON()));
     }
   });
   

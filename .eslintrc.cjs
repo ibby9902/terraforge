@@ -30,6 +30,9 @@ const config = {
         checksVoidReturn: { attributes: false },
       },
     ],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-unsafe-assignment": "warn",
+    "@typescript-eslint/no-unsafe-argument": "warn",
   },
 };
 

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 
 import Providers from "@/components/providers/providers";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "@/components/ui/toaster"
 import Navbar from "@/components/navbar";
 
 const inter = Inter({
@@ -31,6 +32,7 @@ export default function RootLayout({
             <div className="container max-w-7xl mx-auto">
               {children}
             </div>
+            <Toaster />
           </ThemeProvider>
         </body>
       </Providers>

@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { z  } from "zod";
 
 const PROJECT_TYPES = ["mod", "modpack"] as const;
@@ -9,5 +10,6 @@ export const createProjectSchema = z.object({
 });
 
 export const  descriptionSchema = z.object({
-  description: z.string()
+  id: z.string(),
+  description: z.any()
 });
