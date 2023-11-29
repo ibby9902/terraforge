@@ -42,7 +42,7 @@ const ModPage = async ({ params }: Props) => {
     return <div className='w-full flex h-full justify-center items-center'>Mod not found</div>;
   }
 
-  const enableEditor = session?.user?.id === mod.author.id ? true : false;
+  const canEdit = session?.user?.id === mod.author.id ? true : false;
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-8 gap-6 pt-16 h-full grid-rows-3'>
@@ -58,7 +58,7 @@ const ModPage = async ({ params }: Props) => {
           draft={mod.draft}
         />
         <div className='row-start-3 flex flex-col gap-4'>
-          <ExternalResourcesCard issueLink="https://www.google.com" sourceLink="https://www.google.com" wikiLink="https://www.google.com" discordLink="https://www.google.com" />
+          <ExternalResourcesCard issueLink={mod.issuesLink} sourceLink={mod.sourceLink} wikiLink={mod.wikiLink} discordLink={mod.discordLink} />
           <ModAuthorCard name={mod.author.name} avatar={mod.author.image} />
         </div>
       </div>
@@ -68,12 +68,14 @@ const ModPage = async ({ params }: Props) => {
             <TabsTrigger value="description" className='w-full'>Description</TabsTrigger>
             <TabsTrigger value="gallery" className='w-full'>Gallery</TabsTrigger>
             <TabsTrigger value="releases" className='w-full'>Releases</TabsTrigger>
+            {canEdit && <TabsTrigger value="settings" className='w-full'>Settings</TabsTrigger>}
           </TabsList>
           <TabsContent value="description">
-            <ModDescriptionForm enabled={enableEditor} description={mod.description} modId={mod.id}/>
+            <ModDescriptionForm canEdit={canEdit} description={mod.description} modId={mod.id}/>
           </TabsContent>
           <TabsContent value="gallery" className='bg-accent rounded-xl p-4'>Mod gallery here</TabsContent>
           <TabsContent value="releases" className='bg-accent rounded-xl p-4'>Mod releases here</TabsContent>
+          {canEdit && <TabsContent value="settings" className='bg-accent rounded-xl p-4'>Settings here</TabsContent>}
         </Tabs>
       </div>
     </div>

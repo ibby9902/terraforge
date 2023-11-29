@@ -19,12 +19,12 @@ import { descriptionSchema } from '@/lib/validation/project';
 import TipTap from '@/components/tip-tap';
 
 interface Props {
-  enabled: boolean;
+  canEdit: boolean;
   description: Prisma.JsonValue;
   modId: string;
 }
 
-const ModDescriptionForm = ({ enabled, description, modId } : Props) => {
+const ModDescriptionForm = ({ canEdit, description, modId } : Props) => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast()
   const form = useForm<z.infer<typeof descriptionSchema>>({
@@ -34,7 +34,7 @@ const ModDescriptionForm = ({ enabled, description, modId } : Props) => {
       description,
       id: modId
     },
-    disabled: !enabled
+    disabled: !canEdit
   });
 
   const onSubmit = async (values: z.infer<typeof descriptionSchema>) => {
@@ -77,13 +77,13 @@ const ModDescriptionForm = ({ enabled, description, modId } : Props) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <TipTap description={field.value} onChange={field.onChange} enableEditor={enabled}/>
+                <TipTap description={field.value} onChange={field.onChange} enableEditor={canEdit}/>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        {enabled && 
+        {canEdit && 
         <div className='w-full flex justify-end'>
           <Button>{loading ? <Loader2Icon className='animate-spin' /> : "Save"}</Button>
         </div>}

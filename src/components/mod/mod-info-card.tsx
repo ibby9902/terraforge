@@ -3,6 +3,7 @@ import { RefreshCcw, CalendarDays, Flag, Heart } from 'lucide-react';
 
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
   icon: string | null;
@@ -22,8 +23,9 @@ const ModInfoCard = ({ icon, name, summary, downloads, createdAtTimeStamp, updat
           <div className='w-full'>
             {icon ? <div className='bg-black aspect-square w-24 rounded-2xl'>{/* TODO: add "icon" */}</div> : <div className='bg-black aspect-square w-24 rounded-2xl'></div>}
           </div>
-          <div className='w-full'>
+          <div className='w-full flex gap-2 items-center'>
             <h1 className='font-bold text-3xl'>{name}</h1>
+            {draft && <Badge variant="outline">Draft</Badge>}
           </div>
           <div className='w-full text-sm'>
             <p className='text-muted-foreground'>{summary ?? <span className='italic'>No summary</span>}</p>

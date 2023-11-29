@@ -12,6 +12,10 @@ interface Props {
 }
 
 const ExternalResourcesCard = ( { className, issueLink, sourceLink, wikiLink, discordLink } : Props) => {
+  if (!issueLink && !sourceLink && !wikiLink && !discordLink) {
+    return null;
+  }
+  
   return (
     <div className={cn(className, "md:flex flex-col border-accent border rounded-2xl md:col-span-2 p-4 gap-2")}>
       <h1 className='text-xl font-bold'>External resources</h1>

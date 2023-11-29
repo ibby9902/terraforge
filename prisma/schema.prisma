@@ -75,4 +75,8 @@ model Project {
     authorId      String
     downloads     Int
     author        User      @relation(fields: [authorId], references: [id])
+    issuesLink    String?
+    sourceLink    String?
+    wikiLink      String?
+    discordLink       String?
 }
