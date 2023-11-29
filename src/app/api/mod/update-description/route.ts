@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     if (mod.author.id !== session.user.id) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-
+    console.log(description)
     await db.project.update({
       where: {
         id,

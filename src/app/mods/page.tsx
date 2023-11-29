@@ -29,7 +29,16 @@ const ModsPage = async () => {
       
       {/* Mod list container */}
       <div className='w-full h-full md:col-span-6 rounded-2xl flex flex-col gap-4'>
-        {mods.map(m => (<ProjectItemCard key={m.id} id={m.id} slug={m.slug} name={m.name} authorName={m.author.name ?? "Unknown"} summary={m.summary} numDownloads={m.downloads}/>))}
+        {mods.map(m => (<ProjectItemCard 
+          key={m.id} 
+          id={m.id} 
+          slug={m.slug} 
+          name={m.name} 
+          authorName={m.author.name ?? "Unknown"} 
+          summary={m.summary} 
+          numDownloads={m.downloads}
+          icon={m.icon}
+        />))}
       </div>
     </div>
   );

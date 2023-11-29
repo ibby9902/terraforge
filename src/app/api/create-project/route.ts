@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     const session = await getServerAuthSession();
 
     if (!session) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return NextResponse.json({ message: "You need to be logged in to perform this action" }, { status: 401 });
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -37,6 +37,7 @@ export async function POST(request: Request) {
           connect: { id: session.user.id }
         },
         type,
+        icon: "https://utfs.io/f/412b68bd-5b72-4592-9055-932925c84f0b_8.jpg",
         summary,
         downloads: 0
       }
@@ -46,6 +47,6 @@ export async function POST(request: Request) {
   }
   catch(error) {
     console.log("[ERROR][CREATE_PROJECT_POST]: ", error);
-    return new NextResponse("Internal server error", { status: 500 });
+    return NextResponse.json({ message: "An unexpected error occurred" }, { status: 500 });
   }
 }

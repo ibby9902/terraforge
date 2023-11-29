@@ -66,6 +66,7 @@ model Project {
     slug          String    @unique
     type          String
     name          String
+    icon          String
     description   Json?
     summary       String?
     draft         Boolean   @default(true)
@@ -78,5 +79,5 @@ model Project {
     issuesLink    String?
     sourceLink    String?
     wikiLink      String?
-    discordLink       String?
+    discordLink   String?
 }
