@@ -12,7 +12,7 @@ const ModIcon = ({ imageUrl, className } : Props) => {
     <div className={cn("aspect-square relative overflow-hidden rounded-2xl", className)}>
       <Image
         src={imageUrl}
-        alt={"mod icon"}
+        alt="mod icon"
         fill
         style={{ objectFit:"cover" }}
       />

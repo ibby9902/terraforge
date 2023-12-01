@@ -56,6 +56,7 @@ const ModPage = async ({ params }: Props) => {
           updatedAtTimeStamp={mod.updatedAt.toLocaleDateString()}
           approved={mod.approved}
           draft={mod.draft}
+          canEdit={canEdit}
         />
         <div className='row-start-3 flex flex-col gap-4'>
           <ExternalResourcesCard issueLink={mod.issuesLink} sourceLink={mod.sourceLink} wikiLink={mod.wikiLink} discordLink={mod.discordLink} />
