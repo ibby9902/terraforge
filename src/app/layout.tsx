@@ -7,6 +7,11 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster"
 import Navbar from "@/components/navbar";
 
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+ 
+import { ourFileRouter } from "@/app/api/uploadthing/core";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -27,6 +32,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <Providers>
         <body className={`font-sans ${inter.variable}`}>
+          <NextSSRPlugin
+            /**
+             * The `extractRouterConfig` will extract **only** the route configs
+             * from the router to prevent additional information from being
+             * leaked to the client. The data passed to the client is the same
+             * as if you were to fetch `/api/uploadthing` directly.
+             */
+            routerConfig={extractRouterConfig(ourFileRouter)}
+          />
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Navbar/>
             <div className="container max-w-7xl mx-auto">

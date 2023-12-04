@@ -11,20 +11,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
 
 interface Props {
   avatar?: string | null | undefined;
+  username: string | null | undefined;
 }
 
-const NavAvatar = ({ avatar }: Props) => {
+const NavAvatar = ({ avatar, username }: Props) => {
   return (
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className='hover:cursor-pointer'>
             <AvatarImage src={avatar ?? "https://github.com/shadcn.png"} />
+            <AvatarFallback>{username ? username[0] : null}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent>

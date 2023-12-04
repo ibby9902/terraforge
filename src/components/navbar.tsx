@@ -26,7 +26,7 @@ const Navbar = () => {
           {status === "authenticated" ? 
             <div className='flex gap-10'>
               <CreateProjectModal />
-              <NavAvatar avatar={session.user?.image} />
+              <NavAvatar avatar={session.user?.image} username={session.user?.name} />
             </div> : 
             <div className='flex gap-4'>
               <Link href="/sign-in" className={buttonVariants({ variant: "default" })}>Sign in</Link>

@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import EditableModIcon from '@/components/mod/editable-mod-icon';
+import { UploadButton } from "@/lib/uploadthing";
 
 interface Props {
   imageUrl: string;
@@ -27,6 +28,22 @@ const EditModIconModal = ({ imageUrl } : Props) => {
         <DialogHeader>
           <DialogTitle>Select an image</DialogTitle>
         </DialogHeader>
+        <UploadButton
+        appearance={{
+          button:
+            "text-background p-4 bg-foreground",
+        }}
+        endpoint="imageUploader"
+        onClientUploadComplete={(res) => {
+          // Do something with the response
+          console.log("Files: ", res);
+          alert("Upload Completed");
+        }}
+        onUploadError={(error: Error) => {
+          // Do something with the error.
+          alert(`ERROR! ${error.message}`);
+        }}
+      />
       </DialogContent>
     </Dialog>
   );

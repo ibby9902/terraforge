@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { PencilIcon } from 'lucide-react';
+import { ImagePlusIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
@@ -18,7 +18,7 @@ const EditableModIcon = ({ imageUrl, className }: Props) => {
         fill
       />
       <div className='h-full opacity-0 group-hover:opacity-50 duration-300 absolute left-0 bottom-0 right-0 z-10 flex justify-center items-center bg-black text-white cursor-pointer'>
-        <PencilIcon size={30} />
+        <ImagePlusIcon size={24} />
       </div>
     </div>
   );
