@@ -29,10 +29,7 @@ const EditModIconModal = ({ imageUrl } : Props) => {
           <DialogTitle>Select an image</DialogTitle>
         </DialogHeader>
         <UploadButton
-        appearance={{
-          button:
-            "text-background p-4 bg-foreground",
-        }}
+        className='ut-button:text-background ut-button:bg-foreground ut-allowed-content:text-muted-foreground'
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
           // Do something with the response
