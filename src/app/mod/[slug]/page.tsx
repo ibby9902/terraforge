@@ -48,6 +48,7 @@ const ModPage = async ({ params }: Props) => {
     <div className='grid grid-cols-1 lg:grid-cols-8 gap-6 pt-16 h-full grid-rows-3'>
       <div className='lg:col-span-2 flex flex-col gap-4'>
         <ModInfoCard
+          modId={mod.id}
           icon={mod.icon}
           name={mod.name}
           summary={mod.summary}

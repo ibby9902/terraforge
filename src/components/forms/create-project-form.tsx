@@ -47,7 +47,7 @@ const CreateProjectForm = ({ setOpen } : Props) => {
           'content-type': 'application/json',
         }
       });
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      
       const data = await response.json();
       
       if (response.ok) {

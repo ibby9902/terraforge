@@ -13,3 +13,8 @@ export const  descriptionSchema = z.object({
   id: z.string(),
   description: z.any()
 });
+
+export const updateModIconSchema = z.object({
+  modId: z.string(),
+  imageUrl: z.string().url()
+});
