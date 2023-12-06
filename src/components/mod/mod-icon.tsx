@@ -14,7 +14,6 @@ const ModIcon = ({ imageUrl, className } : Props) => {
         src={imageUrl}
         alt="mod icon"
         fill
-        style={{ objectFit:"cover" }}
       />
     </div>
   );

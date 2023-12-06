@@ -44,15 +44,14 @@ const EditModIconModal = ({ imageUrl, modId }: Props) => {
           }
         });
 
-        const data = await response.json();
+        const data = await response.json() as { message: string };
 
         if (response.ok) {
           setCurrentImageUrl(newImageUrl);
           toast({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
             title: data.message,
           });
-  
+          
           setOpen(false);
         }
         else {
@@ -72,6 +71,8 @@ const EditModIconModal = ({ imageUrl, modId }: Props) => {
       }
       finally {
         setLoading(false);
+        setNewImageUrl(undefined);
+        setDisabled(true);
       }
     }
   };
@@ -89,7 +90,7 @@ const EditModIconModal = ({ imageUrl, modId }: Props) => {
         </DialogHeader>
         <div className='p-2 w-full flex flex-col gap-4'>
           <UploadButton
-            className='ut-button:text-background ut-button:bg-foreground ut-allowed-content:text-muted-foreground'
+            className='ut-button:text-background ut-button:bg-foreground ut-allowed-content:text-muted-foreground focus-within:ut-button:ring-foreground'
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
               setNewImageUrl(res[0]?.url);
