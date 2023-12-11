@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ExternalResourcesCard from '@/components/mod/external-resources-card';
 import ModDescriptionForm from '@/components/forms/mod-description-form';
 import { getServerAuthSession } from '@/server/auth';
+import SettingsTabContent from '@/components/mod/settings-tab-content';
 
 interface Props {
   params: {
@@ -34,7 +35,8 @@ const ModPage = async ({ params }: Props) => {
       slug: params.slug
     },
     include: {
-      author: true
+      author: true,
+      tags: true
     }
   });
 
@@ -45,7 +47,7 @@ const ModPage = async ({ params }: Props) => {
   const canEdit = session?.user?.id === mod.author.id ? true : false;
 
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-8 gap-6 pt-16 h-full grid-rows-3'>
+    <div className='grid grid-cols-1 lg:grid-cols-8 gap-6 pt-16 h-full grid-rows-3 lg:grid-rows-1'>
       <div className='lg:col-span-2 flex flex-col gap-4'>
         <ModInfoCard
           modId={mod.id}
@@ -77,7 +79,9 @@ const ModPage = async ({ params }: Props) => {
           </TabsContent>
           <TabsContent value="gallery" className='bg-accent rounded-xl p-4'>Mod gallery here</TabsContent>
           <TabsContent value="releases" className='bg-accent rounded-xl p-4'>Mod releases here</TabsContent>
-          {canEdit && <TabsContent value="settings" className='bg-accent rounded-xl p-4'>Settings here</TabsContent>}
+          {canEdit && <TabsContent value="settings" className='bg-accent rounded-xl p-4'>
+            <SettingsTabContent summary={mod.summary} tags={mod.tags}/>
+            </TabsContent>}
         </Tabs>
       </div>
     </div>
