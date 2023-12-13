@@ -26,7 +26,7 @@ interface Props {
 
 const ModDescriptionForm = ({ canEdit, description, modId } : Props) => {
   const [loading, setLoading] = useState(false);
-  const { toast } = useToast()
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof descriptionSchema>>({
     resolver: zodResolver(descriptionSchema),
     mode: "onChange",

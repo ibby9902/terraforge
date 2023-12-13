@@ -1,25 +1,21 @@
 "use client"
-import React, { FormEvent, useState } from 'react';
-import type { Tag } from '@prisma/client';
+import React from 'react';
 
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { TAG_TYPE } from '@/lib/validation/project';
-import ModTagCheckbox from '../mod-tag-checkbox';
-import UpdateModSummaryForm from '../forms/update-mod-summary-form';
-import UpdateModTagsForm from '../forms/update-mod-tags-form';
+import UpdateModSummaryForm from '@/components/forms/update-mod-summary-form';
+import UpdateModTagsForm from '@/components/forms/update-mod-tags-form';
+import type { ExtendedTag } from '@/lib/types/db';
 
 interface Props {
+  modId: string;
   summary: string;
-  tags: Tag[];
+  tags: ExtendedTag[];
 }
 
-const SettingsTabContent = ({ summary, tags }: Props) => {  
+const SettingsTabContent = ({ modId, summary, tags }: Props) => {  
   return (
     <div>
       <UpdateModSummaryForm existingSummary={summary}/>
-      <UpdateModTagsForm tags={tags.map(t => t.name)}/>
+      <UpdateModTagsForm modId={modId} tags={tags}/>
     </div>
   );
 };

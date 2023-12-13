@@ -1,15 +1,15 @@
-import { Prisma } from "@prisma/client";
 import { z  } from "zod";
 
 const PROJECT_TYPES = ["mod", "modpack"] as const;
-export const enum TAG_TYPE {
-  Content = "Content",
-  Library = "Library",
-  QualityOfLife = "QualityOfLife",
-  GameplayTweaks = "GameplayTweaks",
-  VisualTweaks = "VisualTweaks",
-  AudioTweaks = "AudioTweaks",
-  WorldGen = "WorldGen"
+
+export enum TAG_TYPE {
+  Content = "content",
+  Library = "library",
+  QualityOfLife = "quality-of-life",
+  GameplayTweaks = "gameplay-tweaks",
+  VisualTweaks = "visual-tweaks",
+  AudioTweaks = "audio-tweaks",
+  WorldGen = "world-gen"
 }
 
 export const createProjectSchema = z.object({
@@ -33,11 +33,6 @@ export const updateModSummarySchema = z.object({
 });
 
 export const updateModTagsSchema = z.object({
-  content: z.boolean(),
-  library: z.boolean(),
-  qualityOfLife: z.boolean(),
-  gameplayTweaks: z.boolean(),
-  visualTweaks: z.boolean(),
-  audioTweaks: z.boolean(),
-  worldGen: z.boolean(),
+  modId: z.string(),
+  tags: z.array(z.string())
 });

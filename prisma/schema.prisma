@@ -82,12 +82,18 @@ model Project {
     discordLink   String?
     clientSide    Boolean?
     serverSide    Boolean?
-    tags          Tag[]
+    tags          TagsOnMods[]
 }
 
 model Tag {
     id            String    @id @default(uuid())
-    name          String
-    projectId     String
-    project       Project    @relation(fields: [projectId], references: [id])
+    name          String    @unique
+    mods          TagsOnMods[]
+}
+
+model TagsOnMods {
+    mod        Project     @relation(fields: [modId], references: [id])
+    modId      String      @id
+    tag        Tag         @relation(fields: [tagId], references: [id])
+    tagId      String
 }

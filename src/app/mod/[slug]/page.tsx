@@ -36,7 +36,11 @@ const ModPage = async ({ params }: Props) => {
     },
     include: {
       author: true,
-      tags: true
+      tags: {
+        include: {
+          tag: true
+        }
+      }
     }
   });
 
@@ -80,7 +84,7 @@ const ModPage = async ({ params }: Props) => {
           <TabsContent value="gallery" className='bg-accent rounded-xl p-4'>Mod gallery here</TabsContent>
           <TabsContent value="releases" className='bg-accent rounded-xl p-4'>Mod releases here</TabsContent>
           {canEdit && <TabsContent value="settings" className='bg-accent rounded-xl p-4'>
-            <SettingsTabContent summary={mod.summary} tags={mod.tags}/>
+            <SettingsTabContent modId={mod.id} summary={mod.summary} tags={mod.tags}/>
             </TabsContent>}
         </Tabs>
       </div>
