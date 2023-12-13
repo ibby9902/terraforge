@@ -16,22 +16,59 @@ import {
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { updateModSummarySchema } from '@/lib/validation/project';
+import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
+  modId: string;
   existingSummary: string;
 }
 
-const UpdateModSummaryForm = ({ existingSummary }: Props) => {
+const UpdateModSummaryForm = ({ modId, existingSummary }: Props) => {
   const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof updateModSummarySchema>>({
     resolver: zodResolver(updateModSummarySchema),
     defaultValues: {
+      modId,
       summary: existingSummary
     }
   });
 
-  const onSubmit = () => {
-    //
+  const onSubmit = async (values: z.infer<typeof updateModSummarySchema>) => {
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/mod/update-summary', {
+        method: "post",
+        body: JSON.stringify(values),
+        headers: {
+          'content-type': 'application/json',
+        }
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Summary updated"
+        });
+      }
+      else {
+        toast({
+          title: "Failed to update summary",
+          variant: "destructive"
+        });
+      }
+    }
+    catch (error) {
+      toast({
+        title: "An unexpected error occurred",
+        variant: "destructive"
+      });
+
+      console.error(error);
+    }
+    finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -51,7 +88,7 @@ const UpdateModSummaryForm = ({ existingSummary }: Props) => {
           )}
         />
         <div className='flex justify-end'>
-          <Button disabled={existingSummary === form.watch("summary")}>{loading ? <Loader2 className='animate-spin' /> : "Save"}</Button>
+          <Button disabled={Object.keys(form.formState.dirtyFields).length === 0}>{loading ? <Loader2 className='animate-spin' /> : "Save"}</Button>
         </div>
       </form>
     </Form>

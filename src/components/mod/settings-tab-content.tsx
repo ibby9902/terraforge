@@ -14,7 +14,7 @@ interface Props {
 const SettingsTabContent = ({ modId, summary, tags }: Props) => {  
   return (
     <div>
-      <UpdateModSummaryForm existingSummary={summary}/>
+      <UpdateModSummaryForm modId={modId} existingSummary={summary}/>
       <UpdateModTagsForm modId={modId} tags={tags}/>
     </div>
   );

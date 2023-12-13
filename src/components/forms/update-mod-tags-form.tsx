@@ -81,7 +81,7 @@ const UpdateModTagsForm = ({ modId, tags }: Props) => {
 
       if (response.ok) {
         toast({
-          title: "Mod tags updated"
+          title: "Tags updated"
         });
       }
       else {

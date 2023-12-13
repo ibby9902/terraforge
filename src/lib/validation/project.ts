@@ -29,6 +29,7 @@ export const updateModIconSchema = z.object({
 });
 
 export const updateModSummarySchema = z.object({
+  modId: z.string(),
   summary: z.string()
 });
 
