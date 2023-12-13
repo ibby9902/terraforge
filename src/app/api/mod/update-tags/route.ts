@@ -86,6 +86,17 @@ export async function POST(request: Request) {
         continue; // better to just return error?
       }
 
+      const project = await db.project.findUniqueOrThrow({
+        where: { id: modId },
+        include: { tags: { include: { tag: true } } },
+      });
+
+      const tags = project.tags.map((tagOnMod) => tagOnMod.tag.name);
+      
+      if (tags.includes(tagName)) {
+        continue;
+      }
+
       await db.tagsOnMods.create({
         data: {
           mod: {
