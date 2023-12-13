@@ -61,7 +61,7 @@ const UpdateModTagsForm = ({ modId, tags }: Props) => {
     resolver: zodResolver(updateModTagsSchema),
     defaultValues: {
       modId,
-      tags: []
+      tags: tags.map(e => e.tag.name)
     }
   });
 
@@ -145,7 +145,7 @@ const UpdateModTagsForm = ({ modId, tags }: Props) => {
             ))}
           </div>
           <div className='flex justify-end'>
-            <Button>{loading ? <Loader2 className='animate-spin' /> : "Save"}</Button>
+            <Button disabled={Object.keys(form.formState.dirtyFields).length === 0}>{loading ? <Loader2 className='animate-spin' /> : "Save"}</Button>
           </div>
         </form>
       </Form>
