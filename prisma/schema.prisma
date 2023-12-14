@@ -95,5 +95,7 @@ model TagsOnMods {
     mod        Project     @relation(fields: [modId], references: [id])
     modId      String      
     tag        Tag         @relation(fields: [tagId], references: [id])
-    tagId      String      @id
+    tagId      String      
+    
+    @@id([modId, tagId])
 }

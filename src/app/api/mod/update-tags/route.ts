@@ -58,16 +58,20 @@ export async function POST(request: Request) {
 
       const tagOnMod = await db.tagsOnMods.findUnique({
         where: {
-          modId,
-          tagId: tag.id
+          modId_tagId: {
+            modId,
+            tagId: tag.id,
+          },
         }
       });
 
       if (tagOnMod) {
         await db.tagsOnMods.delete({
           where: {
-            modId,
-            tagId: tag.id
+            modId_tagId: {
+              modId,
+              tagId: tag.id,
+            },
           }
         });
       }
