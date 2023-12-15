@@ -17,12 +17,13 @@ export async function POST(request: Request) {
     const json = await request.json();
     const { modId, tags } = updateModTagsSchema.parse(json);
     
-    const mod = await db.project.findUnique({
+    const mod = await db.mod.findUnique({
       where: {
         id: modId
       },
       include: {
-        author: true
+        author: true,
+        tags: { include: { tag: true } }
       }
     });
 
@@ -90,12 +91,7 @@ export async function POST(request: Request) {
         continue; // better to just return error?
       }
 
-      const project = await db.project.findUniqueOrThrow({
-        where: { id: modId },
-        include: { tags: { include: { tag: true } } },
-      });
-
-      const tags = project.tags.map((tagOnMod) => tagOnMod.tag.name);
+      const tags = mod.tags.map((tagOnMod) => tagOnMod.tag.name);
       
       if (tags.includes(tagName)) {
         continue;

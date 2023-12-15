@@ -15,10 +15,9 @@ export async function POST(request: Request) {
     const json = await request.json();
     const { id, description } = descriptionSchema.parse(json);
 
-    const mod = await db.project.findUnique({
+    const mod = await db.mod.findUnique({
       where: {
         id,
-        type: "mod"
       },
       include: {
         author: true
@@ -33,10 +32,9 @@ export async function POST(request: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
     
-    await db.project.update({
+    await db.mod.update({
       where: {
         id,
-        type: "mod"
       },
       data: {
         description
@@ -46,7 +44,7 @@ export async function POST(request: Request) {
     return new NextResponse("Ok", { status: 200 });
   }
   catch (error) {
-    console.log(`[ERROR][UPDATE_MOD_DESCRIPTION]: Mod Id: ''`, error);
+    console.log("[ERROR][UPDATE_MOD_DESCRIPTION]: ", error);
 
     return NextResponse.json({ status: 500 });
   }

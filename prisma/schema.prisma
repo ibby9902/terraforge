@@ -58,13 +58,12 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
-    projects      Project[]
+    mods          Mod[]
 }
 
-model Project {
+model Mod {
     id            String    @id @default(uuid())
     slug          String    @unique
-    type          String
     name          String
     icon          String
     description   Json?
@@ -92,10 +91,10 @@ model Tag {
 }
 
 model TagsOnMods {
-    mod        Project     @relation(fields: [modId], references: [id])
+    mod        Mod         @relation(fields: [modId], references: [id])
     modId      String      
     tag        Tag         @relation(fields: [tagId], references: [id])
     tagId      String      
-    
+
     @@id([modId, tagId])
 }

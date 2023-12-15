@@ -18,32 +18,31 @@ export async function POST(request: Request) {
 
     const slug = name.replace(/\s+/g, '-').toLowerCase(); // TODO: move to util function
 
-    const project = await db.project.findUnique({
+    const mod = await db.mod.findUnique({
       where: {
         name,
         slug: slug
       }
     });
   
-    if (project) {
+    if (mod) {
       return NextResponse.json({ message: "This project already exists" }, { status: 400 });
     }
   
-    const newProject = await db.project.create({
+    const newMod = await db.mod.create({
       data: {
         name,
         slug: slug,
         author: {
           connect: { id: session.user.id }
         },
-        type,
         icon: "https://utfs.io/f/412b68bd-5b72-4592-9055-932925c84f0b_8.jpg",
         summary,
         downloads: 0
       }
     });
   
-    return NextResponse.json({ slug: newProject.slug }, { status: 200 });
+    return NextResponse.json({ slug: newMod.slug }, { status: 200 });
   }
   catch(error) {
     console.log("[ERROR][CREATE_PROJECT_POST]: ", error);

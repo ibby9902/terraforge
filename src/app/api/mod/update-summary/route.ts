@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     const json = await request.json();
     const { modId, summary } = updateModSummarySchema.parse(json);
 
-    const mod = await db.project.findUnique({
+    const mod = await db.mod.findUnique({
       where: {
         id: modId
       },
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    await db.project.update({
+    await db.mod.update({
       where: {
         id: modId
       },

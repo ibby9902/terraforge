@@ -48,16 +48,13 @@ const CreateProjectForm = ({ setOpen } : Props) => {
         }
       });
       
-      const data = await response.json();
+      const data = await response.json() as { message: string, slug: string }
       
       if (response.ok) {
         setOpen(false);
-        // `/mod/${data.projectName}`
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
         router.push(`/${form.watch("type")}/${data.slug}`);
       }
       else {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
         setMessage(data.message);
       }
 

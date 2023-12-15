@@ -13,7 +13,7 @@ interface Props {
   numDownloads: number;
 } 
 
-const ProjectItemCard = ({ id, slug, name, authorName, icon, summary, numDownloads } : Props) => {
+const ModItemCard = ({ id, slug, name, authorName, icon, summary, numDownloads } : Props) => {
   return (
     <div className='bg-accent rounded-xl p-4 grid md:grid-cols-2 gap-4'>
       <Link href={`/mod/${slug}`} className='md:row-span-3 col-end-1 w-28'>
@@ -33,4 +33,4 @@ const ProjectItemCard = ({ id, slug, name, authorName, icon, summary, numDownloa
   );
 };
 
-export default ProjectItemCard;
+export default ModItemCard;

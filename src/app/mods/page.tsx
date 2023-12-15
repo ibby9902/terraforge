@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { db } from '@/server/db';
-import ProjectItemCard from '@/components/project-item-card';
+import ModItemCard from '@/components/mod/mod-item-card';
 
 export function generateMetadata() {
   return {
@@ -10,11 +10,8 @@ export function generateMetadata() {
 }
 
 const ModsPage = async () => {
-  const mods = await db.project.findMany({
+  const mods = await db.mod.findMany({
     take: 5,
-    where: {
-      type: "mod"
-    },
     include: {
       author: true
     }
@@ -29,7 +26,7 @@ const ModsPage = async () => {
       
       {/* Mod list container */}
       <div className='w-full h-full md:col-span-6 rounded-2xl flex flex-col gap-4'>
-        {mods.map(m => (<ProjectItemCard 
+        {mods.map(m => (<ModItemCard 
           key={m.id} 
           id={m.id} 
           slug={m.slug} 

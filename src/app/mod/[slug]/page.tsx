@@ -16,9 +16,8 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const mod = await db.project.findUnique({
+  const mod = await db.mod.findUnique({
     where: {
-      type: "mod",
       slug: params.slug
     }
   });
@@ -29,9 +28,8 @@ export async function generateMetadata({ params }: Props) {
 
 const ModPage = async ({ params }: Props) => {
   const session = await getServerAuthSession();
-  const mod = await db.project.findUnique({
+  const mod = await db.mod.findUnique({
     where: {
-      type: "mod",
       slug: params.slug
     },
     include: {

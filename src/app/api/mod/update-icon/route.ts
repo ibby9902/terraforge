@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const json = await request.json();
     const { modId, imageUrl } = updateModIconSchema.parse(json);
     
-    const mod = await db.project.findUnique({
+    const mod = await db.mod.findUnique({
       where: {
         id: modId
       },
@@ -32,17 +32,17 @@ export async function POST(request: Request) {
     if (mod.author.id !== session.user.id) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
+    if (mod.icon !== "https://utfs.io/f/412b68bd-5b72-4592-9055-932925c84f0b_8.jpg") {
+      const pathSegments = new URL(mod.icon).pathname.split('/');
+  
+      const key = pathSegments[pathSegments.length - 1];
+      
+      await utapi.deleteFiles(key!);
+    }
 
-    const pathSegments = new URL(mod.icon).pathname.split('/');
-
-    const key = pathSegments[pathSegments.length - 1];
-    
-    await utapi.deleteFiles(key!);
-
-    await db.project.update({
+    await db.mod.update({
       where: {
         id: modId,
-        type: "mod"
       },
       data: {
         icon: imageUrl
