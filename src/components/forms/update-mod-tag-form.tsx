@@ -62,7 +62,7 @@ const UpdateModTagForm = ({ modId, isActive, tagType, text, icon, className }: P
   }
 
   return (
-    <Toggle pressed={toggled} onPressedChange={onClick} className={cn("w-20 rounded-full data-[state=off]:bg-blue-500")}>
+    <Toggle pressed={toggled} onPressedChange={onClick} className={cn("w-20 rounded-full data-[state=off]:bg-blue-500 text-xs")}>
       {text}
     </Toggle>
   );
