@@ -2,8 +2,9 @@
 import React from 'react';
 
 import UpdateModSummaryForm from '@/components/forms/update-mod-summary-form';
-import UpdateModTagsForm from '@/components/forms/update-mod-tags-form';
+import UpdateModTagForm from '@/components/forms/update-mod-tag-form';
 import type { ExtendedTag } from '@/lib/types/db';
+import { TAG_TYPE } from '@/lib/validation/project';
 
 interface Props {
   modId: string;
@@ -11,11 +12,19 @@ interface Props {
   tags: ExtendedTag[];
 }
 
-const SettingsTabContent = ({ modId, summary, tags }: Props) => {  
+const SettingsTabContent = ({ modId, summary, tags }: Props) => {
   return (
     <div>
       <UpdateModSummaryForm modId={modId} existingSummary={summary}/>
-      <UpdateModTagsForm modId={modId} tags={tags}/>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2'>
+        <UpdateModTagForm 
+          modId={modId} 
+          isActive={tags.some(x => x.tag.name == TAG_TYPE.Content)} 
+          tagType={TAG_TYPE.Content} 
+          text='Content' 
+          icon="" 
+        />
+      </div>
     </div>
   );
 };

@@ -36,5 +36,5 @@ export const updateModSummarySchema = z.object({
 export const updateModTagSchema = z.object({
   modId: z.string(),
   tagName: z.nativeEnum(TAG_TYPE),
-  action: z.boolean()
+  action: z.enum(["add", "delete"])
 });
