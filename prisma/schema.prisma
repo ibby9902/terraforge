@@ -91,9 +91,9 @@ model Tag {
 }
 
 model TagsOnMods {
-    mod        Mod         @relation(fields: [modId], references: [id])
+    mod        Mod         @relation(fields: [modId], references: [id], onDelete: Cascade)
     modId      String      
-    tag        Tag         @relation(fields: [tagId], references: [id])
+    tag        Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)
     tagId      String      
 
     @@id([modId, tagId])
