@@ -4,6 +4,7 @@ import type z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import {
   Form,
@@ -26,6 +27,7 @@ interface Props {
 const UpdateModSummaryForm = ({ modId, existingSummary }: Props) => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof updateModSummarySchema>>({
     resolver: zodResolver(updateModSummarySchema),
     defaultValues: {
@@ -50,6 +52,7 @@ const UpdateModSummaryForm = ({ modId, existingSummary }: Props) => {
         toast({
           title: "Summary updated"
         });
+        router.refresh();
       }
       else {
         toast({

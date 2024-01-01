@@ -5,6 +5,7 @@ import type z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Loader2Icon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -27,6 +28,7 @@ interface Props {
 const ModDescriptionForm = ({ canEdit, description, modId } : Props) => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof descriptionSchema>>({
     resolver: zodResolver(descriptionSchema),
     mode: "onChange",
@@ -53,6 +55,7 @@ const ModDescriptionForm = ({ canEdit, description, modId } : Props) => {
         toast({
           title: "Successfully updated"
         });
+        router.refresh();
       }
     }
     catch (error) {

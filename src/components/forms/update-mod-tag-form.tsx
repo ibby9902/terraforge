@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import type z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/navigation';
 
 import { useToast } from "@/components/ui/use-toast";
 import type { TAG_TYPE } from '@/lib/validation/project';
@@ -28,6 +29,7 @@ interface Props {
 const UpdateModTagForm = ({ modId, isActive, tagType, text, icon, className }: Props) => {
   const [toggled, setToggled] = useState(isActive);
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof updateModTagSchema>>({
     resolver: zodResolver(updateModTagSchema),
     defaultValues: {
@@ -54,6 +56,7 @@ const UpdateModTagForm = ({ modId, isActive, tagType, text, icon, className }: P
         toast({
           title: data.message,
         });
+        router.refresh();
       }
       else {
         toast({
