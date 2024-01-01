@@ -17,9 +17,12 @@ interface Props {
 
 const ModsPage = async ({ searchParams } : Props) => {
   const search = typeof searchParams.q === "string" ? searchParams.q : undefined;
+  const page = typeof searchParams.p === "string" ? Number(searchParams.p) : 1;
+  const limit = typeof searchParams.l === "string" ? Number(searchParams.l) : 10;
   
   const mods = await db.mod.findMany({
-    take: 5,
+    skip: (page - 1 ) * limit,
+    take: limit,
     include: {
       author: true
     },
@@ -29,6 +32,8 @@ const ModsPage = async ({ searchParams } : Props) => {
       }
     }
   });
+
+  const totalMods = await db.mod.count();
   
   return (
     <div className='grid grid-cols-1 md:grid-cols-8 gap-6 pt-16 h-full'>
@@ -36,7 +41,7 @@ const ModsPage = async ({ searchParams } : Props) => {
         test
       </div>
       <div className='w-full h-full md:col-span-6 rounded-2xl flex flex-col gap-4'>
-        <SearchFilter search={search}/>
+        <SearchFilter search={search} page={page} limit={limit} totalMods={totalMods}/>
         {mods.length > 0 ? mods.map(m => (<ModItemCard
           key={m.id}
           id={m.id}
