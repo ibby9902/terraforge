@@ -8,7 +8,7 @@ interface Props {
   slug: string;
   name: string;
   authorName: string;
-  icon: string;
+  icon: string | null;
   summary: string | null;
   numDownloads: number;
 } 
@@ -17,7 +17,7 @@ const ModItemCard = ({ id, slug, name, authorName, icon, summary, numDownloads }
   return (
     <div className='bg-accent rounded-xl p-4 grid md:grid-cols-2 gap-4'>
       <Link href={`/mod/${slug}`} className='md:row-span-3 col-end-1 w-28'>
-        <ModIcon imageUrl={icon} />
+        <ModIcon icon={icon} />
       </Link>
       <div className='flex items-end gap-2 md:col-span-3 flex-wrap'>
         <Link href={`/mod/${slug}`} className='font-bold text-2xl'>{name}</Link>

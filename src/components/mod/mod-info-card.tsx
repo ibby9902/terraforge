@@ -9,7 +9,7 @@ import EditModIconModal from '@/components/modals/edit-mod-icon-modal';
 
 interface Props {
   modId: string;
-  icon: string;
+  icon: string | null;
   name: string;
   summary: string | null;
   downloads: number;
@@ -25,7 +25,7 @@ const ModInfoCard = ({ modId, icon, name, summary, downloads, createdAtTimeStamp
     <div className='md:flex flex-col border-accent border rounded-2xl md:col-span-2 p-4 gap-2'>
         <div className='flex flex-col gap-2'>
           <div className='w-full'>
-            {canEdit ? <EditModIconModal imageUrl={icon} modId={modId} />: <ModIcon imageUrl={icon} className='w-24'/>}
+            {canEdit ? <EditModIconModal icon={icon} modId={modId} />: <ModIcon icon={icon} className='w-24'/>}
           </div>
           <div className='w-full flex gap-2 items-center'>
             <h1 className='font-bold text-3xl'>{name}</h1>

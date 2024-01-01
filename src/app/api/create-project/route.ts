@@ -36,7 +36,6 @@ export async function POST(request: Request) {
         author: {
           connect: { id: session.user.id }
         },
-        icon: "https://utfs.io/f/412b68bd-5b72-4592-9055-932925c84f0b_8.jpg",
         summary,
         downloads: 0
       }
