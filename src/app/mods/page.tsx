@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { db } from '@/server/db';
-import ModsPage from '@/components/mods-page';
+import ModsPageContent from './mods-page-content';
 
 export function generateMetadata() {
   return {
@@ -11,14 +11,12 @@ export function generateMetadata() {
 
 interface Props {
   params: { slug: string };
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams: Record<string, string | string[] | undefined>;
 }
 
-const Page = async ({ searchParams } : Props) => {
-  const search = searchParams?.q as string | undefined;
-  const sortBy = searchParams?.s as string | undefined;
-  const showPerPage = searchParams?.m as string | undefined;
-
+const ModsPage = async ({ searchParams } : Props) => {
+  const search = typeof searchParams.q === "string" ? searchParams.q : undefined;
+  
   const mods = await db.mod.findMany({
     take: 5,
     include: {
@@ -31,7 +29,7 @@ const Page = async ({ searchParams } : Props) => {
     }
   });
   
-  return <ModsPage currentMods={mods} currentSearchValue={search} currentSortByValue={sortBy} currentShowPerPage={showPerPage}/>
+  return <ModsPageContent currentMods={mods} search={search} />
 };
 
-export default Page;
+export default ModsPage;
