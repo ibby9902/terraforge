@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     if (mod.author.id !== session.user.id) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
-    if (mod.icon !== "https://utfs.io/f/412b68bd-5b72-4592-9055-932925c84f0b_8.jpg") {
+    if (mod.icon) {
       const pathSegments = new URL(mod.icon).pathname.split('/');
   
       const key = pathSegments[pathSegments.length - 1];

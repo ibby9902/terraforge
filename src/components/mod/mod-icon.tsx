@@ -1,20 +1,23 @@
-import { cn } from '@/lib/utils';
-import Image from 'next/image';
 import React from 'react';
+import Image from 'next/image';
+import { BoxIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface Props {
-  imageUrl: string;
+  icon: string | null;
   className?: string;
 }
 
-const ModIcon = ({ imageUrl, className } : Props) => {
+const ModIcon = ({ icon, className } : Props) => {
   return (
     <div className={cn("aspect-square relative overflow-hidden rounded-2xl", className)}>
-      <Image
-        src={imageUrl}
+      {icon ? <Image
+        src={icon}
         alt="mod icon"
         fill
-      />
+      /> : <div className='flex items-center justify-center h-full'>
+        <BoxIcon size={84} />
+        </div>}
     </div>
   );
 };

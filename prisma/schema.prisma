@@ -65,7 +65,7 @@ model Mod {
     id            String    @id @default(uuid())
     slug          String    @unique
     name          String
-    icon          String
+    icon          String?
     description   Json?
     summary       String
     draft         Boolean   @default(true)

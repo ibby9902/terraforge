@@ -16,14 +16,14 @@ import { UploadButton } from "@/lib/uploadthing";
 import { Button } from '@/components/ui/button';
 
 interface Props {
-  imageUrl: string;
+  icon: string | null;
   modId: string;
 }
 
-const EditModIconModal = ({ imageUrl, modId }: Props) => {
+const EditModIconModal = ({ icon, modId }: Props) => {
   const [open, setOpen] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [currentImageUrl, setCurrentImageUrl] = useState(imageUrl);
+  const [currentImageUrl, setCurrentImageUrl] = useState(icon);
   const [newImageUrl, setNewImageUrl] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
@@ -81,7 +81,7 @@ const EditModIconModal = ({ imageUrl, modId }: Props) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div className='w-24'>
-          <EditableModIcon imageUrl={currentImageUrl} />
+          <EditableModIcon icon={currentImageUrl} />
         </div>
       </DialogTrigger>
       <DialogContent>
