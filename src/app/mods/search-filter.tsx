@@ -16,9 +16,6 @@ import {
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
@@ -38,11 +35,8 @@ const SearchFilter = ({ search, page, limit, totalMods }: Props) => {
   const searchParams = useSearchParams();
   const initialRender = useRef(true);
   const [text, setText] = useState(search);
-  const [newLimit, setNewLimit] = useState(limit);
   const [query] = useDebounce(text, 500);
 
-  // Get a new searchParams string by merging the current
-  // searchParams with a provided key/value pair
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams)
@@ -67,11 +61,11 @@ const SearchFilter = ({ search, page, limit, totalMods }: Props) => {
   }, [query]);
 
   const onLimitChange = (value: string) => {
-    if (value === "10") {
-      return;
+    if (value !== "10") {
+      router.push(pathname + '?' + createQueryString('l', value));
     }
     
-    router.push(pathname + '?' + createQueryString('l', value));
+    
   }
 
   const onNext = () => {
