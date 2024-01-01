@@ -4,13 +4,14 @@ import { Inter } from "next/font/google";
 
 import Providers from "@/components/providers/providers";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/navbar";
 
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
  
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+import Footer from "@/components/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
             <div className="container max-w-7xl mx-auto">
               {children}
             </div>
+            <Footer />
             <Toaster />
           </ThemeProvider>
         </body>

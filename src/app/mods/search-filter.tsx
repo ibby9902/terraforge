@@ -31,7 +31,7 @@ interface Props {
 
 const SearchFilter = ({ search, page, limit, totalMods }: Props) => {
   const router = useRouter();
-  const pathname = usePathname()
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const initialRender = useRef(true);
   const [text, setText] = useState(search);
@@ -39,37 +39,59 @@ const SearchFilter = ({ search, page, limit, totalMods }: Props) => {
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams)
-      params.set(name, value)
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
  
-      return params.toString()
+      return params.toString();
     },
     [searchParams]
-  )
+  );
+
+  const deleteQueryString = useCallback(
+    (key: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.delete(key);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   useEffect(() => {
     if (initialRender.current) {
-      initialRender.current = false
-      return
+      initialRender.current = false;
+      return;
     }
     
     if (!query) {
-      router.push(pathname);
+      router.push(pathname + '?' + deleteQueryString('q'));
     } else {
       router.push(pathname + '?' + createQueryString('q', query));
     }
   }, [query]);
 
   const onLimitChange = (value: string) => {
-    if (value !== "10") {
+    if (value === "10") {
+      router.push(pathname + '?' + deleteQueryString('l'));
+    }
+    else {
       router.push(pathname + '?' + createQueryString('l', value));
     }
-    
-    
   }
 
   const onNext = () => {
-    console.log(Math.ceil(totalMods / limit) === page);
+    const p = page + 1;
+    router.push(pathname + '?' + createQueryString('p', p.toString()));
+  }
+
+  const onPrevious = () => {
+    const p = page - 1;
+    if (p === 1) {
+      router.push(pathname + '?' + deleteQueryString('p'));
+    }
+    else {
+      router.push(pathname + '?' + createQueryString('p', p.toString()));
+    }
   }
 
   return (
@@ -103,10 +125,10 @@ const SearchFilter = ({ search, page, limit, totalMods }: Props) => {
           </Select>
         </div>
       </div>
-      <Pagination>
+      <Pagination className='pb-4'>
         <PaginationContent>
-          <PaginationPrevious disabled={page === 1} className={cn("text-foreground", buttonVariants({ variant: 'outline' }))} />
-          <PaginationNext disabled={Math.ceil(totalMods / limit) === page} onClick={onNext}  className={cn("text-foreground", buttonVariants({ variant: 'outline' }))} />
+          <PaginationPrevious onClick={onPrevious} disabled={page === 1} className={cn("text-foreground", buttonVariants({ variant: 'outline' }))} />
+          <PaginationNext onClick={onNext} disabled={Math.ceil(totalMods / limit) === page} className={cn("text-foreground", buttonVariants({ variant: 'outline' }))} />
         </PaginationContent>
       </Pagination>
     </div>

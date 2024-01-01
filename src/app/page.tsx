@@ -13,7 +13,7 @@ export default async function HomePage() {
   const session = await getServerAuthSession();
 
   return (
-    <main className="w-full h-full">
+    <main className="w-full h-screen">
       <div className="flex flex-col w-full justify-center items-center h-96 gap-6 pt-48">
         <h1 className="text-4xl text-center font-bold sm:text-6xl md:text-7xl">
           The place for Terraria Mods

@@ -46,10 +46,10 @@ const ModPage = async ({ params }: Props) => {
     return <div className='w-full flex h-full justify-center items-center'>Mod not found</div>;
   }
 
-  const canEdit = session?.user?.id === mod.author.id ? true : false;
+  const canEdit = session?.user?.id === mod.author.id;
 
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-8 gap-6 pt-16 h-full grid-rows-3 lg:grid-rows-1'>
+    <div className='grid grid-cols-1 lg:grid-cols-8 gap-6 pt-16 h-screen grid-rows-3 lg:grid-rows-1'>
       <div className='lg:col-span-2 flex flex-col gap-4'>
         <ModInfoCard
           modId={mod.id}
