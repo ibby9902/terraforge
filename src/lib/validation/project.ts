@@ -38,3 +38,7 @@ export const updateModTagSchema = z.object({
   tagName: z.nativeEnum(TAG_TYPE),
   action: z.enum(["add", "delete"])
 });
+
+export const deleteModSchema = z.object({
+  modId: z.string()
+});
