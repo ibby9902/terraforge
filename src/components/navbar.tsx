@@ -2,13 +2,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 
 import NavAvatar from '@/components/nav-avatar';
 import { buttonVariants } from '@/components/ui/button';
 import CreateProjectModal from '@/components/modals/create-project-modal';
 import ThemeToggleButton from '@/components/theme-toggle-button';
+import { cn } from '@/lib/utils';
 
 const Navbar = () => {
+  const pathname = usePathname();
   const { data: session, status } = useSession();
 
   return (
@@ -19,7 +22,7 @@ const Navbar = () => {
             <span className="font-extrabold text-foreground">Terraforge</span>
           </Link>
           <Link href="/mods" >
-            <span className="font-semibold text-primary underline-offset-4 hover:underline">Mods</span>
+            <span className={cn("font-semibold text-primary underline-offset-4 hover:underline", pathname === "/mods" ? "underline" : "")}>Mods</span>
           </Link>
         </div>
         <div className="flex items-center justify-end space-x-8">
