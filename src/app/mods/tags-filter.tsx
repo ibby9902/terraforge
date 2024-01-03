@@ -94,7 +94,7 @@ const TagsFilter = ({ currentTags } : Props) => {
 
   return (
     <div className='hidden md:flex flex-col bg-accent rounded-2xl md:col-span-2 p-4 h-96 gap-4'>
-      <Button onClick={() => setActiveTags([])}>Clear filters</Button>
+      <Button onClick={() => setActiveTags([])} disabled={!activeTags.length}>Clear filters</Button>
       <h1 className='font-bold'>Tags</h1>
       {items.map(i => (
         <div key={i.id} className='flex items-center gap-2'>
